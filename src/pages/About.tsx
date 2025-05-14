@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter, GlowingCard } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -16,6 +16,7 @@ import { toast } from '@/hooks/use-toast';
 import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card';
 import { GlassCard } from '@/components/ui/glass-card';
 import { NeonText } from '@/components/ui/neon-text';
+import { TypewriterText } from '@/components/ui/typewriter-text';
 
 const About = () => {
   const [formData, setFormData] = useState({
@@ -77,6 +78,68 @@ const About = () => {
               </p>
             </div>
           </div>
+          
+          {/* NEW: About the Project Section with Light/Dark mode support */}
+          <section className="mb-16 overflow-hidden relative">
+            <div className="absolute inset-0 -z-10">
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-primary/5 dark:from-transparent dark:to-primary/10 backdrop-blur-3xl"></div>
+              <div className="floating-particles"></div>
+            </div>
+            
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-4xl font-bold mb-2 text-foreground">About the Project</h2>
+              <div className="h-1 w-20 bg-gradient-to-r from-lab-blue to-lab-purple mx-auto rounded-full"></div>
+            </div>
+            
+            <div className="max-w-3xl mx-auto mb-10 text-center">
+              <p className="text-lg text-foreground/90 leading-relaxed">
+                VigyaanKosh is an AI-powered virtual science lab designed to make science accessible, 
+                interactive, and fun for students of all levels. It features simulations, 3D models, 
+                intelligent chat assistance, and engaging experiments across Biology, Chemistry, and Physics.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <GlowingCard 
+                glowColor="blue" 
+                className="p-6 backdrop-blur-lg transform transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="w-16 h-16 bg-blue-500/10 dark:bg-blue-500/20 rounded-full flex items-center justify-center mb-5 mx-auto">
+                  <Beaker className="h-8 w-8 text-blue-500 dark:text-blue-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-3 text-foreground">Interactive Experiments</h3>
+                <p className="text-center text-muted-foreground">
+                  Hands-on simulations that bring scientific concepts to life
+                </p>
+              </GlowingCard>
+              
+              <GlowingCard 
+                glowColor="purple" 
+                className="p-6 backdrop-blur-lg transform transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="w-16 h-16 bg-purple-500/10 dark:bg-purple-500/20 rounded-full flex items-center justify-center mb-5 mx-auto">
+                  <Brain className="h-8 w-8 text-purple-500 dark:text-purple-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-3 text-foreground">AI Assistance</h3>
+                <p className="text-center text-muted-foreground">
+                  Intelligent chat support to guide your scientific exploration
+                </p>
+              </GlowingCard>
+              
+              <GlowingCard 
+                glowColor="green" 
+                className="p-6 backdrop-blur-lg transform transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="w-16 h-16 bg-green-500/10 dark:bg-green-500/20 rounded-full flex items-center justify-center mb-5 mx-auto">
+                  <Lightbulb className="h-8 w-8 text-green-500 dark:text-green-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-3 text-foreground">Learning Tools</h3>
+                <p className="text-center text-muted-foreground">
+                  Comprehensive educational resources and 3D models
+                </p>
+              </GlowingCard>
+            </div>
+          </section>
           
           <Tabs defaultValue="about" className="mb-10">
             <TabsList className="grid w-full grid-cols-4">
