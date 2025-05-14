@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -169,11 +168,22 @@ const Index = () => {
             ))}
           </div>
           
+          {/* V-Bot floating avatar in corner */}
+          <motion.div 
+            className="absolute top-0 right-0 z-20"
+            initial={{ opacity: 0, y: -50, x: 50 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            transition={{ delay: 0.8, duration: 1 }}
+          >
+            <VBotAvatar size="md" className="animate-floating-3d" />
+          </motion.div>
+          
           <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
             <motion.div
               initial="hidden"
               animate={controls}
               variants={fadeInUp}
+              className="md:text-left text-center" // Text alignment for mobile vs desktop
             >
               <div className="mb-4 inline-block py-1 px-3 bg-neon-blue/10 text-neon-cyan rounded-full backdrop-blur-sm border border-neon-cyan/20">
                 <div className="flex items-center gap-2">
@@ -182,25 +192,28 @@ const Index = () => {
                 </div>
               </div>
               
-              <NeonText
-                as="h1"
-                variant="gradient"
-                glow="xl"
-                animation="flicker"
-                className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 relative font-tech"
-              >
-                VigyaanKosh: AI-Powered Virtual Science Labs
-              </NeonText>
+              <div className="text-center mb-6">
+                <NeonText
+                  as="h1"
+                  variant="gradient"
+                  glow="xl"
+                  animation="flicker"
+                  className="text-4xl md:text-6xl font-extrabold tracking-tight relative font-tech mx-auto"
+                >
+                  VigyaanKosh: AI-Powered Virtual Science Labs
+                </NeonText>
+              </div>
               
-              <div className="h-10 mb-8">
+              <div className="h-24 mb-8 text-center">
                 <TypewriterText
                   text="Conduct immersive experiments in Biology, Chemistry, and Physics using advanced AI simulations in a space-age virtual lab."
-                  className="text-lg text-gray-300 max-w-lg"
+                  className="text-lg text-gray-300 max-w-lg mx-auto"
                   delay={500}
+                  speed={30}
                 />
               </div>
               
-              <div className="flex gap-4 mt-12">
+              <div className="flex gap-4 mt-12 justify-center">
                 <GlowingButton 
                   variant="cyan" 
                   size="lg" 
@@ -304,7 +317,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Subject Cards Section with Enhanced Visuals */}
+        {/* Subject Cards Section */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-full h-20 bg-gradient-to-b from-indigo-950 to-transparent"></div>
           <div className="container relative z-10">
@@ -494,7 +507,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Features Section - AI-Powered Learning Features */}
+        {/* Features Section */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-blue-950/30 backdrop-blur-md"></div>
           <div className="container relative z-10">
@@ -591,17 +604,26 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Meet V-Bot Section */}
+        {/* Enhanced Meet V-Bot Section */}
         <section className="py-16 relative overflow-hidden">
           <div className="container relative z-10">
-            <div className="max-w-5xl mx-auto">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, margin: "-100px" }}
-                className="bg-gradient-to-br from-blue-900/30 to-purple-900/20 p-8 md:p-12 rounded-xl shadow-lg border border-neon-cyan/20 overflow-hidden relative"
-              >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-6xl mx-auto"
+            >
+              <div className="text-center mb-10">
+                <NeonText as="h2" variant="gradient" glow="lg" className="text-3xl md:text-4xl font-bold font-tech mb-4">
+                  Meet Your Science Mentor
+                </NeonText>
+                <p className="text-gray-300 max-w-2xl mx-auto">
+                  V-Bot is your personal AI science guide, ready to assist with experiments and answer your questions
+                </p>
+              </div>
+              
+              <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/20 p-8 md:p-12 rounded-xl shadow-lg border border-neon-cyan/20 overflow-hidden relative">
                 <div className="absolute -right-20 top-20 w-60 h-60 bg-neon-cyan/10 rounded-full blur-xl"></div>
                 <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-neon-purple/10 rounded-full blur-xl"></div>
                 
@@ -635,28 +657,67 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  <div className="flex justify-center order-1 md:order-2 relative">
-                    <VBotAvatar size="xl" className="animate-floating-3d" />
-                    
-                    {/* Speech bubble */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 2, duration: 0.5 }}
-                      className="absolute -top-4 -right-4 bg-neon-cyan/10 backdrop-blur-md border border-neon-cyan/30 p-3 rounded-lg max-w-[180px] shadow-lg"
-                    >
-                      <p className="text-neon-cyan text-sm">Need help? I'm your AI science mentor!</p>
-                      <div className="absolute -bottom-2 right-5 w-4 h-4 bg-neon-cyan/10 border-b border-r border-neon-cyan/30 transform rotate-45"></div>
-                    </motion.div>
+                  <div className="order-1 md:order-2 relative flex justify-center items-center">
+                    {/* Floating 3D V-Bot model */}
+                    <div className="relative h-96 w-96">
+                      {/* Holographic platform */}
+                      <motion.div 
+                        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gradient-to-r from-transparent via-neon-cyan/40 to-transparent rounded-full blur-md"
+                        animate={{ 
+                          boxShadow: ['0 5px 15px rgba(0, 255, 255, 0.3)', '0 5px 25px rgba(0, 255, 255, 0.5)', '0 5px 15px rgba(0, 255, 255, 0.3)'],
+                          width: [250, 270, 250]
+                        }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                      
+                      {/* V-Bot Avatar with enhanced size and effects */}
+                      <motion.div
+                        animate={{ y: [-10, 10, -10] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute left-1/2 bottom-10 transform -translate-x-1/2"
+                      >
+                        <VBotAvatar size="xl" interactive={true} className="z-10" />
+                        
+                        {/* Orbiting lights */}
+                        <motion.div
+                          className="absolute inset-0"
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                        >
+                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-neon-purple rounded-full blur-sm opacity-70" />
+                          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-neon-blue rounded-full blur-sm opacity-70" />
+                        </motion.div>
+                        
+                        <motion.div
+                          className="absolute inset-0"
+                          animate={{ rotate: -360 }}
+                          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                        >
+                          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-4 h-4 bg-neon-cyan rounded-full blur-sm opacity-70" />
+                          <div className="absolute top-1/2 right-0 -translate-y-1/2 w-4 h-4 bg-neon-green rounded-full blur-sm opacity-70" />
+                        </motion.div>
+                      </motion.div>
+                      
+                      {/* Speech bubble */}
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ delay: 1, duration: 0.5 }}
+                        className="absolute top-0 right-0 bg-neon-cyan/10 backdrop-blur-md border border-neon-cyan/30 p-4 rounded-lg max-w-[220px] shadow-lg"
+                      >
+                        <p className="text-neon-cyan text-sm">Hey there! I'm V-Bot. Need help with science? I'm here 24/7 to guide you!</p>
+                        <div className="absolute -bottom-2 right-10 w-4 h-4 bg-neon-cyan/10 border-b border-r border-neon-cyan/30 transform rotate-45"></div>
+                      </motion.div>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
         </section>
       </main>
 
-      {/* Footer with upgraded styling */}
+      {/* Footer */}
       <footer className="bg-black/50 backdrop-blur-md text-white py-12 relative overflow-hidden border-t border-neon-cyan/10">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDQ1KSI+PGxpbmUgeDE9IjAiIHkxPSIwIiB4Mj0iMTAwIiB5Mj0iMCIgc3Ryb2tlPSIjMDA4ZWJhMTAiIHN0cm9rZS13aWR0aD0iMC41Ii8+PGxpbmUgeDE9IjAiIHkxPSIxMCIgeDI9IjEwMCIgeTI9IjEwIiBzdHJva2U9IiMwMDhlYmExMCIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48bGluZSB4MT0iMCIgeTE9IjIwIiB4Mj0iMTAwIiB5Mj0iMjAiIHN0cm9rZT0iIzAwOGViYTEwIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxsaW5lIHgxPSIwIiB5MT0iMzAiIHgyPSIxMDAiIHkyPSIzMCIgc3Ryb2tlPSIjMDA4ZWJhMTAiIHN0cm9rZS13aWR0aD0iMC41Ii8+PGxpbmUgeDE9IjAiIHkxPSI0MCIgeDI9IjEwMCIgeTI9IjQwIiBzdHJva2U9IiMwMDhlYmExMCIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48bGluZSB4MT0iMCIgeTE9IjUwIiB4Mj0iMTAwIiB5Mj0iNTAiIHN0cm9rZT0iIzAwOGViYTEwIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxsaW5lIHgxPSIwIiB5MT0iNjAiIHgyPSIxMDAiIHkyPSI2MCIgc3Ryb2tlPSIjMDA4ZWJhMTAiIHN0cm9rZS13aWR0aD0iMC41Ii8+PGxpbmUgeDE9IjAiIHkxPSI3MCIgeDI9IjEwMCIgeTI9IjcwIiBzdHJva2U9IiMwMDhlYmExMCIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48bGluZSB4MT0iMCIgeTE9IjgwIiB4Mj0iMTAwIiB5Mj0iODAiIHN0cm9rZT0iIzAwOGViYTEwIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxsaW5lIHgxPSIwIiB5MT0iOTAiIHgyPSIxMDAiIHkyPSI5MCIgc3Ryb2tlPSIjMDA4ZWJhMTAiIHN0cm9rZS13aWR0aD0iMC41Ii8+PGxpbmUgeDE9IjAiIHkxPSIxMDAiIHgyPSIxMDAiIHkyPSIxMDAiIHN0cm9rZT0iIzAwOGViYTEwIiBzdHJva2Utd2lkdGg9IjAuNSIvPjwvcGF0dGVybj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+')]
       bg-repeat animate-circuit-flow opacity-30 pointer-events-none" />
