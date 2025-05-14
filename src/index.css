@@ -44,33 +44,33 @@
   }
  
   .dark {
-    --background: 222.2 47.4% 11.2%;
-    --foreground: 210 40% 98%;
+    --background: 224 71% 4%;
+    --foreground: 210 20% 98%;
  
-    --card: 222.2 47.4% 11.2%;
-    --card-foreground: 210 40% 98%;
+    --card: 224 71% 4%;
+    --card-foreground: 210 20% 98%;
  
-    --popover: 222.2 47.4% 11.2%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 20% 98%;
  
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
  
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
  
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
  
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
  
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 210 20% 98%;
  
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
 
     /* Brand colors - dark mode variants */
     --color-lab-blue: 203 80% 60%;
@@ -149,6 +149,16 @@
   animation: pulse-subtle 3s ease-in-out infinite;
 }
 
+/* Added animation for rotating elements */
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
 /* Physics Lab styles */
 @layer utilities {
   .shadow-glow {
@@ -166,6 +176,11 @@
   .dark .hover\:shadow-glow:hover {
     box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
   }
+}
+
+/* Glass morphism styles - enhanced for dark theme */
+.glass-card {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg;
 }
 
 /* Grid pattern for Physics header */
@@ -213,8 +228,14 @@
 }
 
 /* Shimmer effect for loading states */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 .shimmer {
-  @apply bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:200%_100%] animate-shimmer;
+  @apply bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:200%_100%];
+  animation: shimmer 2s infinite linear;
 }
 
 /* Dark mode specific styles */
@@ -297,4 +318,23 @@
 
 .animate-shake {
   animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* New Neon glow effects for futuristic UI */
+.neon-text {
+  text-shadow: 0 0 5px rgba(62, 210, 248, 0.5), 
+              0 0 10px rgba(62, 210, 248, 0.3),
+              0 0 15px rgba(62, 210, 248, 0.1);
+}
+
+.neon-border {
+  box-shadow: 0 0 5px rgba(62, 210, 248, 0.5),
+              0 0 10px rgba(62, 210, 248, 0.3),
+              inset 0 0 5px rgba(62, 210, 248, 0.2);
+}
+
+/* Futuristic glassmorphism effects */
+.neo-card {
+  @apply bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-white/10 shadow-lg;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
