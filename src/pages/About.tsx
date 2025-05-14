@@ -7,9 +7,15 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Linkedin, Mail, Brain, Beaker, Lightbulb, HelpCircle, Send, ArrowLeft } from 'lucide-react';
+import { 
+  Linkedin, Mail, Brain, Beaker, Lightbulb, 
+  HelpCircle, Send, ArrowLeft 
+} from 'lucide-react';
 import SiteHeader from '@/components/layout/SiteHeader';
 import { toast } from '@/hooks/use-toast';
+import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card';
+import { GlassCard } from '@/components/ui/glass-card';
+import { NeonText } from '@/components/ui/neon-text';
 
 const About = () => {
   const [formData, setFormData] = useState({
@@ -55,14 +61,22 @@ const About = () => {
         </div>
       
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-lab-blue via-lab-purple to-lab-green">
-              About VigyaanKosh: AI-Powered Virtual Science Labs
-            </span>
-          </h1>
-          <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">
-            Advancing science education through AI-powered simulations
-          </p>
+          {/* Centered Title and Subtitle with Neon Glow */}
+          <div className="text-center mb-10">
+            <NeonText 
+              as="h1" 
+              variant="gradient" 
+              glow="lg"
+              className="text-3xl md:text-5xl font-bold mb-3"
+            >
+              VigyaanKosh: AI-Powered Virtual Science Labs
+            </NeonText>
+            <div className="relative max-w-3xl mx-auto">
+              <p className="text-muted-foreground text-lg typewriter-text overflow-hidden border-r-4 border-lab-blue animate-typing whitespace-nowrap">
+                Conduct immersive experiments in Biology, Chemistry, and Physics using advanced AI simulations in a space-age virtual lab.
+              </p>
+            </div>
+          </div>
           
           <Tabs defaultValue="about" className="mb-10">
             <TabsList className="grid w-full grid-cols-4">
@@ -74,7 +88,7 @@ const About = () => {
             
             {/* About Section */}
             <TabsContent value="about" className="mt-6">
-              <Card>
+              <GlassCard variant="dark" hover="lift" animation="pulse" padding="lg">
                 <CardHeader className="pb-2">
                   <CardTitle className="flex items-center gap-2">
                     <Brain className="h-5 w-5 text-lab-blue" />
@@ -123,156 +137,256 @@ const About = () => {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+              </GlassCard>
             </TabsContent>
             
-            {/* Team Section */}
+            {/* Team Section - Enhanced with hover effects and futuristic styling */}
             <TabsContent value="team" className="mt-6">
-              <Card>
-                <CardHeader className="pb-4">
-                  <CardTitle>Meet the Creators</CardTitle>
-                  <CardDescription>The team behind VigyaanKosh Virtual Science Lab</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Team Member 1 */}
-                    <div className="flex flex-col items-center md:flex-row md:items-start gap-6">
-                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 flex items-center justify-center">
-                        <img 
-                          src="https://api.dicebear.com/7.x/personas/svg?seed=sejal&backgroundColor=b6e3f4" 
-                          alt="Sejal Chavan" 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="text-center md:text-left">
-                        <h3 className="text-lg font-semibold mb-1">Sejal Chavan</h3>
-                        <p className="text-muted-foreground mb-3">Lead Developer</p>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 justify-center md:justify-start">
-                            <Mail className="h-4 w-4 text-muted-foreground" />
-                            <a href="mailto:sejalchavan0209@gmail.com" className="text-sm text-lab-blue hover:underline">
-                              sejalchavan0209@gmail.com
-                            </a>
-                          </div>
-                          <div className="flex items-center gap-2 justify-center md:justify-start">
-                            <Linkedin className="h-4 w-4 text-muted-foreground" />
-                            <a 
-                              href="https://www.linkedin.com/in/sejalchavan" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-sm text-lab-blue hover:underline"
-                            >
-                              linkedin.com/in/sejalchavan
-                            </a>
-                          </div>
+              <div className="mb-6 text-center">
+                <NeonText 
+                  as="h2" 
+                  variant="cyan" 
+                  glow="md"
+                  className="text-2xl md:text-3xl font-bold mb-3"
+                >
+                  Meet the Creators
+                </NeonText>
+                <p className="text-muted-foreground">The innovative minds behind VigyaanKosh Virtual Science Labs</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Team Member 1 - Lead Developer */}
+                <div className="perspective-1000">
+                  <div className="team-card group h-[280px] transition-all duration-500 [transform-style:preserve-3d] hover:[transform:rotateY(180deg)]">
+                    {/* Front side */}
+                    <GlassCard 
+                      className="absolute inset-0 h-full w-full [backface-visibility:hidden] px-6 py-8"
+                      variant="dark" 
+                      hover="none"
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="w-28 h-28 rounded-full overflow-hidden mb-4 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-background shadow-[0_0_15px_rgba(56,189,248,0.5)]">
+                          <img 
+                            src="https://api.dicebear.com/7.x/personas/svg?seed=sejal&backgroundColor=b6e3f4" 
+                            alt="Sejal Chavan" 
+                            className="w-full h-full object-cover"
+                          />
                         </div>
+                        <h3 className="text-lg font-bold text-white">Sejal Chavan</h3>
+                        <p className="text-blue-400 mb-4">Lead Developer</p>
+                        <div className="absolute bottom-0 left-0 w-full h-32 opacity-10 bg-gradient-to-t from-blue-900">
+                          <div className="absolute inset-0 code-background"></div>
+                        </div>
+                        <p className="text-sm text-muted-foreground text-center mt-2">Flip card to see contact details</p>
                       </div>
-                    </div>
+                    </GlassCard>
                     
-                    {/* Team Member 2 */}
-                    <div className="flex flex-col items-center md:flex-row md:items-start gap-6">
-                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/50 dark:to-purple-900/50 flex items-center justify-center">
-                        <img 
-                          src="https://api.dicebear.com/7.x/personas/svg?seed=shravani&backgroundColor=ffdfbf" 
-                          alt="Shravani Desai" 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="text-center md:text-left">
-                        <h3 className="text-lg font-semibold mb-1">Shravani Desai</h3>
-                        <p className="text-muted-foreground mb-3">UX Designer & Developer</p>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 justify-center md:justify-start">
-                            <Mail className="h-4 w-4 text-muted-foreground" />
-                            <a href="mailto:shravanids09@gmail.com" className="text-sm text-lab-blue hover:underline">
-                              shravanids09@gmail.com
-                            </a>
-                          </div>
-                          <div className="flex items-center gap-2 justify-center md:justify-start">
-                            <Linkedin className="h-4 w-4 text-muted-foreground" />
-                            <a 
-                              href="https://www.linkedin.com/in/shravanidesai" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-sm text-lab-blue hover:underline"
-                            >
-                              linkedin.com/in/shravanidesai
-                            </a>
-                          </div>
+                    {/* Back side */}
+                    <GlassCard 
+                      className="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden] flex items-center justify-center p-6"
+                      variant="colored" 
+                      hover="glow"
+                    >
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold mb-2 text-white">Sejal Chavan</h3>
+                        <p className="text-blue-400 mb-4">Lead Developer</p>
+                        <div className="space-y-4">
+                          <a href="mailto:sejalchavan0209@gmail.com" 
+                            className="flex items-center justify-center gap-2 text-white hover:text-blue-400 transition-colors group">
+                            <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
+                              <Mail className="h-5 w-5" />
+                            </div>
+                            <span>sejalchavan0209@gmail.com</span>
+                          </a>
+                          <a href="https://www.linkedin.com/in/sejalchavan" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 text-white hover:text-blue-400 transition-colors group">
+                            <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
+                              <Linkedin className="h-5 w-5" />
+                            </div>
+                            <span>linkedin.com/in/sejalchavan</span>
+                          </a>
                         </div>
                       </div>
-                    </div>
-                    
-                    {/* Team Member 3 - NEW */}
-                    <div className="flex flex-col items-center md:flex-row md:items-start gap-6">
-                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-green-100 to-blue-100 dark:from-green-900/50 dark:to-blue-900/50 flex items-center justify-center">
-                        <img 
-                          src="https://api.dicebear.com/7.x/personas/svg?seed=amrut&backgroundColor=c2f0c2" 
-                          alt="Amrut S" 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="text-center md:text-left">
-                        <h3 className="text-lg font-semibold mb-1">Amrut S</h3>
-                        <p className="text-muted-foreground mb-3">Backend Developer</p>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 justify-center md:justify-start">
-                            <Mail className="h-4 w-4 text-muted-foreground" />
-                            <a href="mailto:02fe22bcs016@kletech.ac.in" className="text-sm text-lab-blue hover:underline">
-                              02fe22bcs016@kletech.ac.in
-                            </a>
-                          </div>
-                          <div className="flex items-center gap-2 justify-center md:justify-start">
-                            <Linkedin className="h-4 w-4 text-muted-foreground" />
-                            <a 
-                              href="#" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-sm text-lab-blue hover:underline"
-                            >
-                              LinkedIn Profile
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Team Member 4 - NEW */}
-                    <div className="flex flex-col items-center md:flex-row md:items-start gap-6">
-                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 flex items-center justify-center">
-                        <img 
-                          src="https://api.dicebear.com/7.x/personas/svg?seed=vinod&backgroundColor=ffd6a5" 
-                          alt="Vinod N" 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="text-center md:text-left">
-                        <h3 className="text-lg font-semibold mb-1">Vinod N</h3>
-                        <p className="text-muted-foreground mb-3">Data Scientist</p>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 justify-center md:justify-start">
-                            <Mail className="h-4 w-4 text-muted-foreground" />
-                            <a href="mailto:02fe22bcs174@kletech.ac.in" className="text-sm text-lab-blue hover:underline">
-                              02fe22bcs174@kletech.ac.in
-                            </a>
-                          </div>
-                          <div className="flex items-center gap-2 justify-center md:justify-start">
-                            <Linkedin className="h-4 w-4 text-muted-foreground" />
-                            <a 
-                              href="#" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-sm text-lab-blue hover:underline"
-                            >
-                              LinkedIn Profile
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    </GlassCard>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+                
+                {/* Team Member 2 - UX Designer */}
+                <div className="perspective-1000">
+                  <div className="team-card group h-[280px] transition-all duration-500 [transform-style:preserve-3d] hover:[transform:rotateY(180deg)]">
+                    {/* Front side */}
+                    <GlassCard 
+                      className="absolute inset-0 h-full w-full [backface-visibility:hidden] px-6 py-8"
+                      variant="dark" 
+                      hover="none"
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="w-28 h-28 rounded-full overflow-hidden mb-4 ring-2 ring-purple-500/50 ring-offset-2 ring-offset-background shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                          <img 
+                            src="https://api.dicebear.com/7.x/personas/svg?seed=shravani&backgroundColor=ffdfbf" 
+                            alt="Shravani Desai" 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <h3 className="text-lg font-bold text-white">Shravani Desai</h3>
+                        <p className="text-purple-400 mb-4">UX Designer & Developer</p>
+                        <div className="absolute bottom-0 left-0 w-full h-32 opacity-10 bg-gradient-to-t from-purple-900">
+                          <div className="absolute inset-0 wireframe-background"></div>
+                        </div>
+                        <p className="text-sm text-muted-foreground text-center mt-2">Flip card to see contact details</p>
+                      </div>
+                    </GlassCard>
+                    
+                    {/* Back side */}
+                    <GlassCard 
+                      className="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden] flex items-center justify-center p-6"
+                      variant="colored" 
+                      hover="glow"
+                    >
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold mb-2 text-white">Shravani Desai</h3>
+                        <p className="text-purple-400 mb-4">UX Designer & Developer</p>
+                        <div className="space-y-4">
+                          <a href="mailto:shravanids09@gmail.com" 
+                            className="flex items-center justify-center gap-2 text-white hover:text-purple-400 transition-colors group">
+                            <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/30 transition-colors">
+                              <Mail className="h-5 w-5" />
+                            </div>
+                            <span>shravanids09@gmail.com</span>
+                          </a>
+                          <a href="https://www.linkedin.com/in/shravanidesai" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 text-white hover:text-purple-400 transition-colors group">
+                            <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/30 transition-colors">
+                              <Linkedin className="h-5 w-5" />
+                            </div>
+                            <span>linkedin.com/in/shravanidesai</span>
+                          </a>
+                        </div>
+                      </div>
+                    </GlassCard>
+                  </div>
+                </div>
+                
+                {/* Team Member 3 - Backend Developer */}
+                <div className="perspective-1000">
+                  <div className="team-card group h-[280px] transition-all duration-500 [transform-style:preserve-3d] hover:[transform:rotateY(180deg)]">
+                    {/* Front side */}
+                    <GlassCard 
+                      className="absolute inset-0 h-full w-full [backface-visibility:hidden] px-6 py-8"
+                      variant="dark" 
+                      hover="none"
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="w-28 h-28 rounded-full overflow-hidden mb-4 ring-2 ring-green-500/50 ring-offset-2 ring-offset-background shadow-[0_0_15px_rgba(74,222,128,0.5)]">
+                          <img 
+                            src="https://api.dicebear.com/7.x/personas/svg?seed=amrut&backgroundColor=c2f0c2" 
+                            alt="Amrut S" 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <h3 className="text-lg font-bold text-white">Amrut S</h3>
+                        <p className="text-green-400 mb-4">Backend Developer</p>
+                        <div className="absolute bottom-0 left-0 w-full h-32 opacity-10 bg-gradient-to-t from-green-900">
+                          <div className="absolute inset-0 code-background"></div>
+                        </div>
+                        <p className="text-sm text-muted-foreground text-center mt-2">Flip card to see contact details</p>
+                      </div>
+                    </GlassCard>
+                    
+                    {/* Back side */}
+                    <GlassCard 
+                      className="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden] flex items-center justify-center p-6"
+                      variant="colored" 
+                      hover="glow"
+                    >
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold mb-2 text-white">Amrut S</h3>
+                        <p className="text-green-400 mb-4">Backend Developer</p>
+                        <div className="space-y-4">
+                          <a href="mailto:02fe22bcs016@kletech.ac.in" 
+                            className="flex items-center justify-center gap-2 text-white hover:text-green-400 transition-colors group">
+                            <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
+                              <Mail className="h-5 w-5" />
+                            </div>
+                            <span>02fe22bcs016@kletech.ac.in</span>
+                          </a>
+                          <a href="#" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 text-white hover:text-green-400 transition-colors group">
+                            <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
+                              <Linkedin className="h-5 w-5" />
+                            </div>
+                            <span>LinkedIn Profile</span>
+                          </a>
+                        </div>
+                      </div>
+                    </GlassCard>
+                  </div>
+                </div>
+                
+                {/* Team Member 4 - Data Scientist */}
+                <div className="perspective-1000">
+                  <div className="team-card group h-[280px] transition-all duration-500 [transform-style:preserve-3d] hover:[transform:rotateY(180deg)]">
+                    {/* Front side */}
+                    <GlassCard 
+                      className="absolute inset-0 h-full w-full [backface-visibility:hidden] px-6 py-8"
+                      variant="dark" 
+                      hover="none"
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="w-28 h-28 rounded-full overflow-hidden mb-4 ring-2 ring-amber-500/50 ring-offset-2 ring-offset-background shadow-[0_0_15px_rgba(251,191,36,0.5)]">
+                          <img 
+                            src="https://api.dicebear.com/7.x/personas/svg?seed=vinod&backgroundColor=ffd6a5" 
+                            alt="Vinod N" 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <h3 className="text-lg font-bold text-white">Vinod N</h3>
+                        <p className="text-amber-400 mb-4">Data Scientist</p>
+                        <div className="absolute bottom-0 left-0 w-full h-32 opacity-10 bg-gradient-to-t from-amber-900">
+                          <div className="absolute inset-0 data-background"></div>
+                        </div>
+                        <p className="text-sm text-muted-foreground text-center mt-2">Flip card to see contact details</p>
+                      </div>
+                    </GlassCard>
+                    
+                    {/* Back side */}
+                    <GlassCard 
+                      className="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden] flex items-center justify-center p-6"
+                      variant="colored" 
+                      hover="glow"
+                    >
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold mb-2 text-white">Vinod N</h3>
+                        <p className="text-amber-400 mb-4">Data Scientist</p>
+                        <div className="space-y-4">
+                          <a href="mailto:02fe22bcs174@kletech.ac.in" 
+                            className="flex items-center justify-center gap-2 text-white hover:text-amber-400 transition-colors group">
+                            <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center group-hover:bg-amber-500/30 transition-colors">
+                              <Mail className="h-5 w-5" />
+                            </div>
+                            <span>02fe22bcs174@kletech.ac.in</span>
+                          </a>
+                          <a href="#" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 text-white hover:text-amber-400 transition-colors group">
+                            <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center group-hover:bg-amber-500/30 transition-colors">
+                              <Linkedin className="h-5 w-5" />
+                            </div>
+                            <span>LinkedIn Profile</span>
+                          </a>
+                        </div>
+                      </div>
+                    </GlassCard>
+                  </div>
+                </div>
+              </div>
             </TabsContent>
             
             {/* Help Section */}
@@ -424,14 +538,62 @@ const About = () => {
         </div>
       </main>
       
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container px-4">
+      <footer className="relative bg-gray-900 text-white py-12 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 z-0 opacity-10">
+            {/* Circuit lines background */}
+            <div className="absolute top-0 left-0 w-full h-full grid-pattern"></div>
+            
+            {/* Stars */}
+            <div className="stars absolute inset-0">
+              {Array(20).fill(0).map((_, i) => (
+                <div 
+                  key={i}
+                  className="absolute rounded-full bg-white animate-pulse-subtle"
+                  style={{
+                    width: `${Math.random() * 3 + 1}px`,
+                    height: `${Math.random() * 3 + 1}px`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 3}s`,
+                    animationDuration: `${Math.random() * 3 + 2}s`
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* Circuit lines */}
+            <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path 
+                d="M0,50 Q25,30 50,50 T100,50" 
+                fill="none" 
+                stroke="rgba(56, 189, 248, 0.8)" 
+                strokeWidth="0.2"
+              ></path>
+              <path 
+                d="M0,70 Q25,50 50,70 T100,70" 
+                fill="none" 
+                stroke="rgba(168, 85, 247, 0.8)" 
+                strokeWidth="0.2"
+              ></path>
+              <path 
+                d="M0,30 Q25,50 50,30 T100,30" 
+                fill="none" 
+                stroke="rgba(74, 222, 128, 0.8)" 
+                strokeWidth="0.2"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        
+        <div className="container px-4 relative z-10">
           <div className="text-center">
-            <p className="mb-4">© {new Date().getFullYear()} VigyaanKosh: AI-Powered Virtual Science Labs. All rights reserved.</p>
-            <div className="flex justify-center space-x-4">
-              <Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link>
-              <Link to="/about" className="text-gray-400 hover:text-white transition-colors">About</Link>
-              <a href="mailto:support@vigyaankosh.edu" className="text-gray-400 hover:text-white transition-colors">
+            <p className="mb-6 text-lg">© {new Date().getFullYear()} VigyaanKosh: AI-Powered Virtual Science Labs. All rights reserved.</p>
+            <div className="flex justify-center space-x-6">
+              <Link to="/" className="text-gray-400 hover:text-white transition-colors hover-link">Home</Link>
+              <Link to="/about" className="text-gray-400 hover:text-white transition-colors hover-link">About</Link>
+              <Link to="/about?tab=team" className="text-gray-400 hover:text-white transition-colors hover-link">Team</Link>
+              <a href="mailto:support@vigyaankosh.edu" className="text-gray-400 hover:text-white transition-colors hover-link">
                 Contact
               </a>
             </div>
