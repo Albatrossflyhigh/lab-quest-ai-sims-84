@@ -123,6 +123,19 @@
   animation: bubble 3s ease-in-out forwards;
 }
 
+/* Animation delays for bubbles */
+.animation-delay-700 {
+  animation-delay: 700ms;
+}
+
+.animation-delay-1500 {
+  animation-delay: 1500ms;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2000ms;
+}
+
 /* Animation for Newton's Laws simulation */
 @keyframes slide-right {
   from {

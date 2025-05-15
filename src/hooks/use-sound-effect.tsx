@@ -1,55 +1,78 @@
 
-import { useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
-type SoundType = "hover" | "click" | "success" | "error" | "notification";
+type SoundEffectType = 'hover' | 'click' | 'success' | 'error' | 'bubbling' | 'fizz' | 'pour' | 'explosion';
 
-const audioCache: Record<string, HTMLAudioElement> = {};
+interface SoundMap {
+  [key: string]: HTMLAudioElement;
+}
 
-export const useSoundEffect = () => {
-  const playSound = useCallback((type: SoundType) => {
-    // Check if audio is enabled in local storage
-    const audioEnabled = localStorage.getItem("vk-sound") !== "disabled";
-    if (!audioEnabled) return;
+export const useSoundEffect = (initialMuted = false) => {
+  const [muted, setMuted] = useState(initialMuted);
+  const [soundsLoaded, setSoundsLoaded] = useState(false);
+  const [sounds, setSounds] = useState<SoundMap>({});
 
-    let soundPath = "";
-    
-    switch (type) {
-      case "hover":
-        soundPath = "/sounds/fizz.mp3";
-        break;
-      case "click":
-        soundPath = "/sounds/pour.mp3";
-        break;
-      case "success":
-        soundPath = "/sounds/bubbling.mp3";
-        break;
-      case "error":
-        soundPath = "/sounds/explosion.mp3";
-        break;
-      case "notification":
-        soundPath = "/sounds/fizz.mp3";
-        break;
-      default:
-        return;
-    }
+  // Create and preload sound effects
+  useEffect(() => {
+    const soundMap: SoundMap = {
+      hover: new Audio('/sounds/hover.mp3'),
+      click: new Audio('/sounds/click.mp3'),
+      success: new Audio('/sounds/success.mp3'),
+      error: new Audio('/sounds/error.mp3'),
+      bubbling: new Audio('/sounds/bubbling.mp3'),
+      fizz: new Audio('/sounds/fizz.mp3'),
+      pour: new Audio('/sounds/pour.mp3'),
+      explosion: new Audio('/sounds/explosion.mp3'),
+    };
 
-    try {
-      // Use cached audio if available
-      if (!audioCache[soundPath]) {
-        audioCache[soundPath] = new Audio(soundPath);
-        audioCache[soundPath].volume = 0.3; // Lower volume for better UX
-      }
-      
-      // Reset and play
-      audioCache[soundPath].currentTime = 0;
-      audioCache[soundPath].play().catch(err => {
-        // Silently fail - browser may restrict autoplay
-        console.log("Audio playback restricted:", err);
+    // Set initial volume levels
+    Object.values(soundMap).forEach(audio => {
+      audio.volume = 0.3;
+      // Preload audio
+      audio.load();
+    });
+
+    // Specific volume adjustments
+    if (soundMap.hover) soundMap.hover.volume = 0.1;
+
+    setSounds(soundMap);
+    setSoundsLoaded(true);
+
+    // Cleanup function to remove audio elements
+    return () => {
+      Object.values(soundMap).forEach(audio => {
+        audio.pause();
+        audio.src = '';
       });
-    } catch (error) {
-      console.error("Error playing sound effect:", error);
-    }
+    };
   }, []);
 
-  return { playSound };
+  // Play sound effect function
+  const playSound = useCallback((type: SoundEffectType) => {
+    if (muted || !soundsLoaded) return;
+
+    const sound = sounds[type];
+    if (sound) {
+      // Stop and reset current sound before playing again
+      sound.pause();
+      sound.currentTime = 0;
+      
+      // Play the sound
+      const playPromise = sound.play();
+      
+      // Handle potential play() rejection (browsers may block autoplay)
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error("Audio playback failed:", error);
+        });
+      }
+    }
+  }, [sounds, muted, soundsLoaded]);
+
+  // Toggle mute function
+  const toggleMute = useCallback(() => {
+    setMuted(prev => !prev);
+  }, []);
+
+  return { playSound, muted, toggleMute };
 };

@@ -1,12 +1,30 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, GlowingCard } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { GlowingButton } from '@/components/ui/glowing-button';
+import { Badge } from '@/components/ui/badge';
+import { GlassCard } from '@/components/ui/glass-card';
 import SiteHeader from '@/components/layout/SiteHeader';
-import { Bookmark, Clock, FlaskConical, Atom, Battery, Zap, Beaker, FlaskRound, TestTube } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { 
+  Bookmark, 
+  Clock, 
+  FlaskConical, 
+  Atom, 
+  Battery, 
+  Beaker, 
+  FlaskRound, 
+  TestTube,
+  Sparkles,
+  Scale,
+  Zap 
+} from 'lucide-react';
 
 const Chemistry = () => {
+  const { toast } = useToast();
+  
   const experiments = [
     {
       id: 'catalyst',
@@ -16,7 +34,7 @@ const Chemistry = () => {
       duration: '25 minutes',
       image: '/placeholder.svg',
       featured: true,
-      icon: <Atom className="w-8 h-8 text-purple-500" />
+      icon: <Atom className="w-8 h-8 text-purple-500 dark:text-purple-400" />
     },
     {
       id: 'electrolysis',
@@ -26,7 +44,7 @@ const Chemistry = () => {
       duration: '40 minutes',
       image: '/placeholder.svg',
       featured: true,
-      icon: <Battery className="w-8 h-8 text-blue-500" />
+      icon: <Battery className="w-8 h-8 text-blue-500 dark:text-blue-400" />
     },
     {
       id: 'flame-test',
@@ -35,7 +53,7 @@ const Chemistry = () => {
       difficulty: 'Beginner',
       duration: '25 minutes',
       image: '/placeholder.svg',
-      icon: <FlaskConical className="w-8 h-8 text-orange-500" />
+      icon: <FlaskConical className="w-8 h-8 text-orange-500 dark:text-orange-400" />
     },
     {
       id: 'acid-base',
@@ -43,7 +61,8 @@ const Chemistry = () => {
       description: 'Determine the concentration of an acid or base by neutralizing it with a standard solution of known concentration.',
       difficulty: 'Intermediate',
       duration: '35 minutes',
-      image: '/placeholder.svg'
+      image: '/placeholder.svg',
+      icon: <TestTube className="w-8 h-8 text-green-500 dark:text-green-400" />
     },
     {
       id: 'baking-soda',
@@ -51,186 +70,264 @@ const Chemistry = () => {
       description: 'Observe an acid-base reaction that produces carbon dioxide gas through the reaction of vinegar with baking soda.',
       difficulty: 'Beginner',
       duration: '20 minutes',
-      image: '/placeholder.svg'
+      image: '/placeholder.svg',
+      icon: <Beaker className="w-8 h-8 text-cyan-500 dark:text-cyan-400" />
     }
   ];
+
+  const handleStartExperiment = (experimentId: string, experimentTitle: string) => {
+    toast({
+      title: "Experiment Selected",
+      description: `Starting ${experimentTitle} experiment...`,
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-800">
       <SiteHeader />
       
-      <main className="flex-1 container py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-50">Chemistry Experiments</h1>
-          <p className="text-gray-600 dark:text-gray-300 mt-2">Explore the fascinating world of chemical reactions and transformations</p>
+      {/* Page content with floating molecules background */}
+      <main className="flex-1 container py-8 relative">
+        {/* Animated background particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="bubble animate-bubble absolute left-1/4 top-1/3 w-4 h-4 rounded-full bg-blue-400/20 dark:bg-blue-400/30"></div>
+          <div className="bubble animate-bubble animation-delay-700 absolute left-3/4 top-1/2 w-6 h-6 rounded-full bg-purple-400/20 dark:bg-purple-400/30"></div>
+          <div className="bubble animate-bubble animation-delay-1500 absolute left-1/5 top-2/3 w-5 h-5 rounded-full bg-green-400/20 dark:bg-green-400/30"></div>
+          <div className="bubble animate-bubble animation-delay-2000 absolute left-2/3 top-1/4 w-3 h-3 rounded-full bg-pink-400/20 dark:bg-pink-400/30"></div>
         </div>
         
-        {/* Featured Molarity Simulation Card */}
-        <Card className="mb-10 overflow-hidden hover:shadow-lg transition-shadow border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/30 dark:to-blue-900/30 dark:border-purple-800/50">
-          <div className="p-6 flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="w-16 h-16 bg-blue-200 dark:bg-blue-800 rounded-full flex items-center justify-center">
-                <Beaker className="w-8 h-8 text-blue-700 dark:text-blue-300" />
+        {/* Header section with title and subtitle */}
+        <div className="relative z-10 mb-10 text-center md:text-left">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-50 font-tech tracking-tight">
+                Chemistry Experiments
+              </h1>
+              <p className="text-gray-600 dark:text-gray-300 mt-3 text-lg max-w-2xl">
+                Explore the fascinating world of chemical reactions and transformations
+              </p>
+            </div>
+            <div className="hidden md:flex space-x-2 mt-4 md:mt-0">
+              <FlaskConical className="w-10 h-10 text-cyan-500 dark:text-cyan-400 animate-pulse-subtle" />
+              <TestTube className="w-10 h-10 text-purple-500 dark:text-purple-400 animate-floating-3d" />
+              <Atom className="w-10 h-10 text-blue-500 dark:text-blue-400 animate-rotate-slow" />
+            </div>
+          </div>
+          
+          <div className="h-1 w-32 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-4"></div>
+        </div>
+        
+        {/* Featured Cards - Top Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          {/* Molarity Simulation Card */}
+          <GlassCard 
+            variant="colored" 
+            hover="glow" 
+            animation="pulse" 
+            className="relative overflow-hidden"
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 dark:from-blue-500/30 dark:to-cyan-500/30 flex items-center justify-center">
+                  <Beaker className="w-8 h-8 text-blue-500 dark:text-blue-400" />
+                </div>
               </div>
-              <div className="ml-4">
-                <h3 className="text-2xl font-bold mb-1 dark:text-gray-50">Molarity Simulation</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Interactive PhET-style simulation to explore concentration and molarity principles
-                </p>
-                <Button asChild className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600">
+              <h3 className="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-gray-50">Molarity Simulation</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-center mb-6">
+                Interactive simulation to explore concentration and molarity principles
+              </p>
+              <div className="flex justify-center">
+                <GlowingButton asChild variant="cyan" glow="cyan" animation="pulse">
                   <Link to="/chemistry/virtual-lab">
                     Try Molarity Simulation
                   </Link>
-                </Button>
+                </GlowingButton>
               </div>
             </div>
-            <div className="hidden md:flex space-x-4">
-              <Beaker className="w-12 h-12 text-blue-400 dark:text-blue-500" />
-            </div>
-          </div>
-        </Card>
-        
-        {/* Interactive Equation Builder Card */}
-        <Card className="mb-10 overflow-hidden hover:shadow-lg transition-shadow border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/30 dark:to-blue-900/30 dark:border-purple-800/50">
-          <div className="p-6 flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="w-16 h-16 bg-purple-200 dark:bg-purple-800 rounded-full flex items-center justify-center">
-                <TestTube className="w-8 h-8 text-purple-700 dark:text-purple-300" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
+          </GlassCard>
+          
+          {/* Interactive Equation Builder Card */}
+          <GlassCard 
+            variant="colored" 
+            hover="glow" 
+            animation="pulse" 
+            className="relative overflow-hidden"
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 dark:from-purple-500/30 dark:to-pink-500/30 flex items-center justify-center">
+                  <Scale className="w-8 h-8 text-purple-500 dark:text-purple-400" />
+                </div>
               </div>
-              <div className="ml-4">
-                <h3 className="text-2xl font-bold mb-1 dark:text-gray-50">Interactive Equation Builder</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Build and balance chemical equations with realistic reactions and explore molarity principles
-                </p>
-                <Button asChild className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600">
+              <h3 className="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-gray-50">Interactive Equation Builder</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-center mb-6">
+                Build and balance chemical equations
+              </p>
+              <div className="flex justify-center">
+                <GlowingButton asChild variant="neon" glow="neon">
                   <Link to="/chemistry/virtual-lab">
-                    Explore Molarity & Equations
+                    Explore & Balance Equations
                   </Link>
-                </Button>
+                </GlowingButton>
               </div>
             </div>
-            <div className="hidden md:flex space-x-4">
-              <FlaskRound className="w-12 h-12 text-purple-400 dark:text-purple-500" />
-              <FlaskConical className="w-12 h-12 text-blue-400 dark:text-blue-500" />
-              <Beaker className="w-12 h-12 text-green-400 dark:text-green-500" />
-            </div>
-          </div>
-        </Card>
-        
-        {/* Chemistry Lab Card */}
-        <Card className="mb-10 overflow-hidden hover:shadow-lg transition-shadow border-purple-200 dark:border-purple-800/50 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/30 dark:to-blue-900/30">
-          <div className="p-6 flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="w-16 h-16 bg-purple-200 dark:bg-purple-800 rounded-full flex items-center justify-center">
-                <Beaker className="w-8 h-8 text-purple-700 dark:text-purple-300" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+          </GlassCard>
+          
+          {/* Virtual Chemistry Lab Card */}
+          <GlassCard 
+            variant="colored" 
+            hover="glow" 
+            animation="pulse" 
+            className="relative overflow-hidden"
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500/20 to-teal-500/20 dark:from-green-500/30 dark:to-teal-500/30 flex items-center justify-center">
+                  <FlaskRound className="w-8 h-8 text-green-500 dark:text-green-400" />
+                </div>
               </div>
-              <div className="ml-4">
-                <h3 className="text-2xl font-bold mb-1 dark:text-gray-50">Virtual Chemistry Lab</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Experience our interactive lab environment with realistic chemical reactions and experiments
-                </p>
-                <Button asChild className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600">
+              <h3 className="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-gray-50">Virtual Chemistry Lab</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-center mb-6">
+                Experience realistic chemical reactions in an interactive lab environment
+              </p>
+              <div className="flex justify-center">
+                <GlowingButton asChild variant="default" glow="default">
                   <Link to="/chemistry/lab">
                     Enter Virtual Lab
                   </Link>
-                </Button>
+                </GlowingButton>
               </div>
             </div>
-            <div className="hidden md:flex space-x-4">
-              <FlaskRound className="w-12 h-12 text-purple-400 dark:text-purple-500" />
-              <FlaskConical className="w-12 h-12 text-blue-400 dark:text-blue-500" />
-              <Beaker className="w-12 h-12 text-green-400 dark:text-green-500" />
-            </div>
-          </div>
-        </Card>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-teal-500"></div>
+          </GlassCard>
+        </div>
         
-        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-          {experiments
-            .filter(exp => exp.featured)
-            .map((experiment) => (
-              <Card key={experiment.id} className="overflow-hidden hover:shadow-lg transition-shadow border-purple-200 dark:border-purple-800/30">
-                <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-6 flex items-center justify-between">
-                  <div className="flex items-center">
-                    {experiment.icon || (
-                      <div className="w-12 h-12 bg-purple-200 dark:bg-purple-800 rounded-full flex items-center justify-center">
-                        <FlaskConical className="w-6 h-6 text-purple-700 dark:text-purple-300" />
+        {/* Featured Experiments - Middle Row */}
+        <div className="mb-10">
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-gray-50">
+            <Sparkles className="h-5 w-5 text-amber-500" />
+            Featured Experiments
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {experiments
+              .filter(exp => exp.featured)
+              .map((experiment) => (
+                <GlowingCard 
+                  key={experiment.id}
+                  glowColor="blue"
+                  className="overflow-hidden transition-all duration-300 hover:-translate-y-1 border-blue-200/30 dark:border-blue-400/10"
+                >
+                  <div className="flex flex-col md:flex-row">
+                    <div className="md:w-1/4 flex items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+                      <div className="w-16 h-16 rounded-full bg-white/80 dark:bg-black/30 shadow-inner flex items-center justify-center">
+                        {experiment.icon || (
+                          <FlaskConical className="w-7 h-7 text-blue-500 dark:text-blue-400" />
+                        )}
                       </div>
-                    )}
-                    <div className="ml-4">
-                      <h3 className="text-xl font-bold mb-1 dark:text-gray-50">{experiment.title}</h3>
-                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                        <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 text-xs font-medium rounded px-2 py-1 mr-2">
+                    </div>
+                    <div className="md:w-3/4 p-6">
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50 mr-auto">{experiment.title}</h3>
+                        <Badge className="bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-700/50 pulse-badge">
+                          Featured
+                        </Badge>
+                        <Badge className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700/50">
                           {experiment.difficulty}
-                        </span>
+                        </Badge>
+                      </div>
+                      
+                      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <Clock className="h-3 w-3 mr-1" />
+                        <span>{experiment.duration}</span>
+                      </div>
+                      
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        {experiment.description}
+                      </p>
+                      
+                      <div className="flex justify-between items-center">
+                        <Button 
+                          onClick={() => handleStartExperiment(experiment.id, experiment.title)}
+                          asChild 
+                          className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-none"
+                        >
+                          <Link to={`/chemistry/${experiment.id}`}>
+                            Start Experiment
+                          </Link>
+                        </Button>
+                        <Button variant="ghost" size="icon" className="text-gray-500 dark:text-gray-400">
+                          <Bookmark className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </GlowingCard>
+              ))}
+          </div>
+        </div>
+        
+        {/* All Experiments - Bottom Grid */}
+        <div>
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-gray-50">
+            <Zap className="h-5 w-5 text-purple-500" />
+            All Experiments
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {experiments
+              .filter(exp => !exp.featured)
+              .map((experiment) => (
+                <Card 
+                  key={experiment.id} 
+                  className="overflow-hidden border-gray-200 dark:border-gray-800 hover-card hover:shadow-lg dark:hover:shadow-cyan-900/20 transition-all duration-300"
+                >
+                  <div className="h-40 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-white/80 dark:bg-black/50 shadow-inner flex items-center justify-center">
+                      {experiment.icon || (
+                        <FlaskConical className="w-10 h-10 text-gray-400 dark:text-gray-500" />
+                      )}
+                    </div>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <Badge className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700">
+                        {experiment.difficulty}
+                      </Badge>
+                      <div className="flex items-center text-gray-500 dark:text-gray-400 text-xs">
                         <Clock className="h-3 w-3 mr-1" />
                         {experiment.duration}
                       </div>
                     </div>
-                  </div>
-                  <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 text-xs font-bold rounded-full px-3 py-1">
-                    Featured
-                  </span>
-                </div>
-                <CardContent className="pt-6">
-                  <p className="text-gray-700 dark:text-gray-300">{experiment.description}</p>
-                </CardContent>
-                <CardFooter className="flex justify-between bg-white dark:bg-transparent">
-                  <Button asChild className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600">
-                    <Link to={`/chemistry/${experiment.id}`}>
-                      Start Experiment
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" size="icon">
-                    <Bookmark className="h-4 w-4" />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {experiments
-            .filter(exp => !exp.featured)
-            .map((experiment) => (
-              <Card key={experiment.id} className="overflow-hidden hover:shadow-lg transition-shadow dark:border-gray-800">
-                <div className="h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                  {experiment.icon ? (
-                    <div className="flex items-center justify-center w-full h-full bg-opacity-10 bg-blue-50 dark:bg-opacity-10 dark:bg-blue-900">
-                      {experiment.icon}
-                    </div>
-                  ) : (
-                    <img 
-                      src={experiment.image} 
-                      alt={experiment.title}
-                      className="w-16 h-16 opacity-30" 
-                    />
-                  )}
-                </div>
-                <CardContent className="pt-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="bg-blue-100 text-lab-blue dark:bg-blue-900 dark:text-blue-200 text-xs font-medium rounded px-2 py-1">
-                      {experiment.difficulty}
-                    </span>
-                    <div className="flex items-center text-gray-500 dark:text-gray-400 text-xs">
-                      <Clock className="h-3 w-3 mr-1" />
-                      {experiment.duration}
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 dark:text-gray-100">{experiment.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">{experiment.description}</p>
-                </CardContent>
-                <CardFooter className="pt-0 flex justify-between">
-                  <Button asChild variant="outline" size="sm" className="dark:border-gray-700 dark:hover:bg-gray-800">
-                    <Link to={`/chemistry/${experiment.id}`}>
-                      Start Experiment
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" size="icon">
-                    <Bookmark className="h-4 w-4" />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+                    
+                    <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-gray-50">{experiment.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                      {experiment.description}
+                    </p>
+                  </CardContent>
+                  
+                  <CardFooter className="px-6 pb-6 pt-0 flex justify-between">
+                    <Button 
+                      onClick={() => handleStartExperiment(experiment.id, experiment.title)}
+                      asChild 
+                      variant="outline" 
+                      size="sm" 
+                      className="border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    >
+                      <Link to={`/chemistry/${experiment.id}`}>
+                        Start Experiment
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="icon" className="text-gray-500 dark:text-gray-400">
+                      <Bookmark className="h-4 w-4" />
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+          </div>
         </div>
       </main>
       
