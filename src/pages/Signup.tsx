@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AlertCircle, Check, Google, Info } from 'lucide-react';
+import { AlertCircle, Check, Mail, Info } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -363,7 +362,7 @@ const Signup = () => {
                       <FormControl>
                         <Checkbox
                           checked={field.value}
-                          onCheckedChange={field.onChange}
+                          onCheckedChange={(checked) => field.onChange(checked === true)}
                           className="data-[state=checked]:bg-neon-blue"
                         />
                       </FormControl>
@@ -416,7 +415,7 @@ const Signup = () => {
                     disabled={isLoading}
                     className="w-full bg-background/50 backdrop-blur-sm"
                   >
-                    <Google className="mr-2 h-4 w-4" /> Google
+                    <Mail className="mr-2 h-4 w-4" /> Google
                   </Button>
                 </div>
               </form>

@@ -1,3 +1,4 @@
+
 import * as React from "react"
 
 import type {
@@ -61,7 +62,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         toasts: [
-          { ...action.toast, id: genId() },
+          { id: genId(), ...action.toast },
           ...state.toasts
         ].slice(0, TOAST_LIMIT),
       }
@@ -183,7 +184,7 @@ const useToast = () => {
 export { useToast, toast }
 
 // Toast wrapper component used in shadcn/ui
-function toast({ ...props }: ToastProps) {
+function toast(props) {
   const { toast } = useToast()
   return toast(props)
 }

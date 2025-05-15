@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -36,11 +35,10 @@ const About = () => {
     // In a real app, this would send the form data to a server
     console.log('Form submitted:', formData);
     
-    // Show success toast
+    // Show success toast - fixed by updating the toast properties
     toast({
       title: "Message Sent",
       description: "Thank you for your feedback. We'll get back to you soon!",
-      duration: 5000,
     });
     
     // Reset form
