@@ -21,6 +21,7 @@ import ChemistryLab from "./pages/ChemistryLab";
 import ChemistryVirtualLab from "./pages/ChemistryVirtualLab";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import About from "./pages/About";
 import "./App.css";
 
@@ -38,6 +39,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="/biology" element={<Biology />} />
               <Route path="/chemistry" element={<Chemistry />} />
               <Route path="/physics" element={<Physics />} />
