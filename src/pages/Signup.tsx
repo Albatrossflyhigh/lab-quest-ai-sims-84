@@ -44,8 +44,8 @@ const signupSchema = z.object({
       { message: 'Password must contain uppercase, lowercase and number' }),
   confirmPassword: z.string(),
   role: z.enum(['student', 'educator', 'researcher']),
-  termsAgreed: z.literal(true, {
-    errorMap: () => ({ message: 'You must agree to the terms and privacy policy' }),
+  termsAgreed: z.boolean().refine((val) => val === true, {
+    message: 'You must agree to the terms and privacy policy',
   })
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
