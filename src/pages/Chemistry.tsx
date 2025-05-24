@@ -118,62 +118,99 @@ const Chemistry = () => {
         </div>
         
         {/* Featured Cards - Top Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
           {/* Molarity Simulation Card */}
-          <GlassCard 
-            variant="colored" 
-            hover="glow" 
-            animation="pulse" 
-            className="relative overflow-hidden"
-          >
-            <div className="p-6">
-              <div className="flex items-center justify-center mb-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 dark:from-blue-500/30 dark:to-cyan-500/30 flex items-center justify-center">
-                  <Beaker className="w-8 h-8 text-blue-500 dark:text-blue-400" />
+          <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-teal-500/10 backdrop-blur-xl border border-cyan-500/30 dark:border-cyan-400/20 hover:border-cyan-400/50 dark:hover:border-cyan-300/40 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/25 dark:hover:shadow-cyan-400/20 hover:-translate-y-2">
+            {/* Glowing background effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            {/* Content */}
+            <div className="relative z-10 p-8">
+              <div className="flex items-center justify-center mb-6">
+                <div className="relative">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 dark:from-cyan-400/30 dark:to-blue-400/30 flex items-center justify-center backdrop-blur-sm border border-cyan-300/30 dark:border-cyan-400/20 group-hover:scale-110 transition-transform duration-300">
+                    <Beaker className="w-10 h-10 text-cyan-500 dark:text-cyan-400 group-hover:animate-neon-pulse" />
+                  </div>
+                  {/* Floating particles around icon */}
+                  <div className="absolute -top-2 -right-2 w-3 h-3 rounded-full bg-cyan-400/60 animate-floating-3d"></div>
+                  <div className="absolute -bottom-1 -left-1 w-2 h-2 rounded-full bg-blue-400/60 animate-pulse-subtle"></div>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-gray-50">Molarity Simulation</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-center mb-6">
-                Interactive simulation to explore concentration and molarity principles
-              </p>
-              <div className="flex justify-center">
-                <GlowingButton asChild variant="cyan" glow="cyan" animation="pulse">
-                  <Link to="/chemistry/virtual-lab">
-                    Try Molarity Simulation
-                  </Link>
-                </GlowingButton>
+              
+              <div className="text-center space-y-4">
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent group-hover:from-cyan-500 group-hover:to-blue-500 transition-all duration-300">
+                  Try Molarity Simulation
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-w-sm mx-auto">
+                  Interactive simulation to explore concentration and molarity principles
+                </p>
+                
+                <div className="pt-4">
+                  <GlowingButton 
+                    asChild 
+                    variant="cyan" 
+                    glow="cyan" 
+                    animation="pulse"
+                    className="px-8 py-3 text-base font-semibold shadow-lg shadow-cyan-500/25 hover:shadow-xl hover:shadow-cyan-500/40 border-2 border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300"
+                  >
+                    <Link to="/chemistry/virtual-lab">
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      Start Simulation
+                    </Link>
+                  </GlowingButton>
+                </div>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
-          </GlassCard>
+            
+            {/* Bottom accent line */}
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-teal-500 group-hover:h-2 transition-all duration-300"></div>
+          </div>
           
           {/* Virtual Chemistry Lab Card */}
-          <GlassCard 
-            variant="colored" 
-            hover="glow" 
-            animation="pulse" 
-            className="relative overflow-hidden"
-          >
-            <div className="p-6">
-              <div className="flex items-center justify-center mb-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500/20 to-teal-500/20 dark:from-green-500/30 dark:to-teal-500/30 flex items-center justify-center">
-                  <FlaskRound className="w-8 h-8 text-green-500 dark:text-green-400" />
+          <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-500/10 via-indigo-500/10 to-blue-500/10 backdrop-blur-xl border border-purple-500/30 dark:border-purple-400/20 hover:border-purple-400/50 dark:hover:border-purple-300/40 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20 hover:-translate-y-2">
+            {/* Glowing background effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            {/* Content */}
+            <div className="relative z-10 p-8">
+              <div className="flex items-center justify-center mb-6">
+                <div className="relative">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500/20 to-indigo-500/20 dark:from-purple-400/30 dark:to-indigo-400/30 flex items-center justify-center backdrop-blur-sm border border-purple-300/30 dark:border-purple-400/20 group-hover:scale-110 transition-transform duration-300">
+                    <FlaskRound className="w-10 h-10 text-purple-500 dark:text-purple-400 group-hover:animate-neon-pulse" />
+                  </div>
+                  {/* Floating particles around icon */}
+                  <div className="absolute -top-2 -right-2 w-3 h-3 rounded-full bg-purple-400/60 animate-floating-3d"></div>
+                  <div className="absolute -bottom-1 -left-1 w-2 h-2 rounded-full bg-indigo-400/60 animate-pulse-subtle"></div>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-gray-50">Virtual Chemistry Lab</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-center mb-6">
-                Experience realistic chemical reactions in an interactive lab environment
-              </p>
-              <div className="flex justify-center">
-                <GlowingButton asChild variant="default" glow="default">
-                  <Link to="/chemistry/lab">
-                    Enter Virtual Lab
-                  </Link>
-                </GlowingButton>
+              
+              <div className="text-center space-y-4">
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-500 group-hover:to-indigo-500 transition-all duration-300">
+                  Virtual Chemistry Lab
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-w-sm mx-auto">
+                  Experience realistic chemical reactions in an interactive lab environment
+                </p>
+                
+                <div className="pt-4">
+                  <GlowingButton 
+                    asChild 
+                    variant="default" 
+                    glow="default"
+                    className="px-8 py-3 text-base font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/40 border-2 border-purple-400/30 hover:border-purple-400/60 transition-all duration-300"
+                  >
+                    <Link to="/chemistry/lab">
+                      <Zap className="w-4 h-4 mr-2" />
+                      Enter Virtual Lab
+                    </Link>
+                  </GlowingButton>
+                </div>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-teal-500"></div>
-          </GlassCard>
+            
+            {/* Bottom accent line */}
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 group-hover:h-2 transition-all duration-300"></div>
+          </div>
         </div>
         
         {/* Featured Experiments - Middle Row */}
