@@ -118,7 +118,7 @@ const Chemistry = () => {
         </div>
         
         {/* Featured Cards - Top Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {/* Molarity Simulation Card */}
           <GlassCard 
             variant="colored" 
@@ -145,34 +145,6 @@ const Chemistry = () => {
               </div>
             </div>
             <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
-          </GlassCard>
-          
-          {/* Interactive Equation Builder Card */}
-          <GlassCard 
-            variant="colored" 
-            hover="glow" 
-            animation="pulse" 
-            className="relative overflow-hidden"
-          >
-            <div className="p-6">
-              <div className="flex items-center justify-center mb-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 dark:from-purple-500/30 dark:to-pink-500/30 flex items-center justify-center">
-                  <Scale className="w-8 h-8 text-purple-500 dark:text-purple-400" />
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-gray-50">Interactive Equation Builder</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-center mb-6">
-                Build and balance chemical equations
-              </p>
-              <div className="flex justify-center">
-                <GlowingButton asChild variant="neon" glow="neon">
-                  <Link to="/chemistry/virtual-lab">
-                    Explore & Balance Equations
-                  </Link>
-                </GlowingButton>
-              </div>
-            </div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
           </GlassCard>
           
           {/* Virtual Chemistry Lab Card */}
