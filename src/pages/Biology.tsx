@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { GlowingButton } from '@/components/ui/glowing-button';
+import { GlassCard } from '@/components/ui/glass-card';
 import SiteHeader from '@/components/layout/SiteHeader';
 import ChatBotMentor from '@/components/ChatBotMentor';
-import { Bookmark, Clock, Microscope, CheckCircle2, Beaker, Zap } from 'lucide-react';
+import { Bookmark, Clock, Microscope, CheckCircle2, Beaker, Zap, Play } from 'lucide-react';
 
 const Biology = () => {
   const [completedExperiments, setCompletedExperiments] = useState<string[]>([]);
@@ -82,136 +84,183 @@ const Biology = () => {
     Math.round((completedExperiments.length / experiments.length) * 100);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Vibrant Header with science-themed background */}
-      <div 
-        className="bg-gradient-to-r from-green-50 to-blue-50 relative overflow-hidden"
-        style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3Cpattern id=\'dna\' patternUnits=\'userSpaceOnUse\' width=\'40\' height=\'40\' patternTransform=\'rotate(45)\'%3E%3Cpath d=\'M 0,20 a 20,20 0 1,0 40,0 a 20,20 0 1,0 -40,0\' fill=\'none\' stroke=\'%2399f6e4\' stroke-width=\'1\'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'url(%23dna)\'/%3E%3C/svg%3E")'
-        }}
-      >
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-purple-900 transition-colors duration-300">
+      {/* Scientific pattern background */}
+      <div className="fixed inset-0 opacity-30 dark:opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 50% 50%, rgba(20, 184, 166, 0.1) 0%, transparent 50%)`,
+          backgroundSize: '300px 300px, 400px 400px, 350px 350px'
+        }} />
+      </div>
+
+      {/* Glowing Header */}
+      <div className="relative overflow-hidden">
         <SiteHeader />
         
-        <div className="container pt-16 pb-20 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">🔬 Biology Lab</h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8">Explore Life with Interactive Experiments</p>
+        <div className="container pt-20 pb-32 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-8">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-teal-600 via-purple-600 to-blue-600 dark:from-teal-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent animate-neon-pulse">
+                🔬 Biology Lab
+              </h1>
+              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-12 font-medium">
+                Explore Life with Interactive Experiments
+              </p>
+            </div>
             
-            <div className="flex justify-center gap-4">
-              <Button asChild variant="outline" className="gap-2">
-                <Link to="/biology/models">
-                  <Microscope className="h-4 w-4" />
+            {/* Primary CTA Button */}
+            <div className="flex justify-center mb-16">
+              <GlowingButton 
+                asChild 
+                variant="cyan" 
+                size="xl" 
+                glow="cyan" 
+                animation="pulse"
+                className="text-lg px-8 py-4"
+              >
+                <Link to="/biology/models" className="flex items-center gap-3">
+                  <Microscope className="h-6 w-6" />
                   Explore 3D Biology Models
                 </Link>
-              </Button>
+              </GlowingButton>
             </div>
           </div>
         </div>
 
-        {/* DNA helix decoration - absolute positioned */}
-        <div className="absolute -bottom-12 left-0 right-0 h-24 opacity-20">
-          <div className="w-full h-full bg-repeat-x" 
-            style={{
-              backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'120\' height=\'30\' viewBox=\'0 0 120 30\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M 0,15 C 40,5 80,25 120,15 L 120,30 L 0,30 Z\' fill=\'%2310b981\'/%3E%3C/svg%3E")',
-              backgroundSize: '120px 30px'
-            }}>
-          </div>
-        </div>
+        {/* Decorative elements */}
+        <div className="absolute top-1/2 left-10 w-20 h-20 bg-teal-400/20 dark:bg-teal-400/30 rounded-full blur-xl animate-floating-3d" />
+        <div className="absolute top-1/3 right-20 w-32 h-32 bg-purple-400/20 dark:bg-purple-400/30 rounded-full blur-xl animate-floating-3d" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-1/4 left-1/3 w-16 h-16 bg-blue-400/20 dark:bg-blue-400/30 rounded-full blur-xl animate-floating-3d" style={{ animationDelay: '4s' }} />
       </div>
       
-      <main className="flex-1 container py-8">
-        {/* Progress Tracker */}
-        <div className="mb-10 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900">Your Biology Journey</h2>
-              <p className="text-gray-600">
+      <main className="relative z-10 container py-8 -mt-16">
+        {/* Progress Tracker with Glassmorphism */}
+        <GlassCard 
+          variant="default" 
+          hover="lift" 
+          animation="floating" 
+          className="mb-12 backdrop-blur-xl bg-white/20 dark:bg-slate-800/30 border border-white/30 dark:border-slate-700/50"
+        >
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 p-8">
+            <div className="flex-1">
+              <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Your Biology Journey</h2>
+              <p className="text-slate-600 dark:text-slate-300 text-lg">
                 {completedExperiments.length} of {experiments.length} experiments completed
               </p>
             </div>
             
-            <div className="w-full md:w-1/2">
-              <Progress value={completionPercentage} className="h-3 bg-green-100" />
-              <div className="flex justify-between mt-1 text-xs text-gray-500">
+            <div className="flex-1 max-w-md">
+              <div className="mb-4">
+                <Progress 
+                  value={completionPercentage} 
+                  className="h-4 bg-slate-200/50 dark:bg-slate-700/50 rounded-full overflow-hidden"
+                />
+              </div>
+              <div className="flex justify-between text-sm text-slate-500 dark:text-slate-400 font-medium">
                 <span>Beginner</span>
                 <span>Intermediate</span>
                 <span>Advanced</span>
               </div>
             </div>
             
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                <span className="font-semibold text-green-800">{completionPercentage}%</span>
+            <div className="flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-400 to-purple-400 flex items-center justify-center shadow-lg">
+                <span className="font-bold text-white text-lg">{completionPercentage}%</span>
               </div>
             </div>
           </div>
-        </div>
+        </GlassCard>
         
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Available Experiments</h2>
+        <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-8">Interactive Experiments</h2>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Experiment Cards Grid */}
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
           {experiments.map((experiment) => {
             const isCompleted = isExperimentCompleted(experiment.id);
             
             return (
-              <Card 
-                key={experiment.id} 
-                className={`overflow-hidden hover:shadow-lg transition-all ${
-                  isCompleted ? 'border-green-200 bg-green-50/30' : 'border-gray-200'
-                }`}
+              <GlassCard
+                key={experiment.id}
+                variant="default"
+                hover="lift"
+                animation="none"
+                className={`group backdrop-blur-xl transition-all duration-300 ${
+                  isCompleted 
+                    ? 'bg-gradient-to-br from-emerald-100/40 to-teal-100/40 dark:from-emerald-900/20 dark:to-teal-900/20 border-emerald-300/50 dark:border-emerald-600/30' 
+                    : 'bg-white/30 dark:bg-slate-800/30 border-white/40 dark:border-slate-700/50'
+                } hover:shadow-2xl hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20`}
               >
-                <div className="h-48 bg-gray-100 flex items-center justify-center relative overflow-hidden">
-                  <img 
-                    src={experiment.image} 
-                    alt={experiment.title}
-                    className="w-16 h-16 opacity-30" 
-                  />
+                {/* Card Image/Icon Area */}
+                <div className="relative h-48 bg-gradient-to-br from-teal-100/50 to-purple-100/50 dark:from-teal-900/30 dark:to-purple-900/30 flex items-center justify-center overflow-hidden rounded-t-2xl">
+                  <Microscope className="w-16 h-16 text-teal-600/60 dark:text-teal-400/60 group-hover:scale-110 transition-transform duration-300" />
                   
                   {/* Completed badge */}
                   {isCompleted && (
-                    <div className="absolute top-3 right-3 bg-green-500 text-white p-1 rounded-full">
+                    <div className="absolute top-4 right-4 bg-emerald-500 text-white p-2 rounded-full shadow-lg">
                       <CheckCircle2 className="h-5 w-5" />
                     </div>
                   )}
+                  
+                  {/* Floating particles */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-teal-400/40 rounded-full animate-float" />
+                    <div className="absolute top-3/4 right-1/3 w-1.5 h-1.5 bg-purple-400/40 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+                    <div className="absolute bottom-1/3 left-2/3 w-1 h-1 bg-blue-400/40 rounded-full animate-float" style={{ animationDelay: '2s' }} />
+                  </div>
                 </div>
                 
-                <CardContent className="pt-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className={`text-xs font-medium rounded-full px-3 py-1 ${
+                <div className="p-6">
+                  {/* Difficulty and Duration badges */}
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`text-xs font-semibold rounded-full px-3 py-1 ${
                       experiment.difficulty === 'Beginner' 
-                        ? 'bg-blue-100 text-blue-800' 
+                        ? 'bg-blue-100/80 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300' 
                         : experiment.difficulty === 'Intermediate'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-orange-100 text-orange-800'
+                          ? 'bg-purple-100/80 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300'
+                          : 'bg-orange-100/80 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300'
                     }`}>
                       {experiment.difficulty}
                     </span>
-                    <div className="flex items-center text-gray-500 text-xs">
-                      <Clock className="h-3 w-3 mr-1" />
+                    <div className="flex items-center text-slate-500 dark:text-slate-400 text-sm font-medium">
+                      <Clock className="h-4 w-4 mr-1" />
                       {experiment.duration}
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-semibold mb-2">{experiment.title}</h3>
-                  <p className="text-gray-600 text-sm">{experiment.description}</p>
-                </CardContent>
+                  <h3 className="text-xl font-bold mb-3 text-slate-800 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+                    {experiment.title}
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                    {experiment.description}
+                  </p>
+                </div>
                 
-                <CardFooter className="pt-0 flex justify-between">
-                  <Button 
+                {/* Action buttons */}
+                <div className="p-6 pt-0 flex justify-between items-center">
+                  <GlowingButton 
                     asChild 
-                    variant="outline" 
+                    variant={isCompleted ? "neon" : "cyan"} 
                     size="sm"
-                    className={isCompleted ? "border-green-500 text-green-700 hover:bg-green-50" : ""}
+                    glow={isCompleted ? "neon" : "cyan"}
+                    className="flex items-center gap-2"
                   >
                     <Link to={experiment.path}>
+                      <Play className="h-4 w-4" />
                       {isCompleted ? 'Review Experiment' : 'Start Experiment'}
                     </Link>
-                  </Button>
-                  <Button variant="ghost" size="icon">
+                  </GlowingButton>
+                  
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20"
+                  >
                     <Bookmark className="h-4 w-4" />
                   </Button>
-                </CardFooter>
-              </Card>
+                </div>
+              </GlassCard>
             );
           })}
         </div>
@@ -222,49 +271,59 @@ const Biology = () => {
         </div>
       </main>
       
-      <footer className="bg-white py-8 border-t">
-        <div className="container">
-          <div className="grid md:grid-cols-3 gap-8 items-center">
-            <div className="flex justify-center md:justify-start">
-              <Link to="/" className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                <Microscope className="h-6 w-6 text-lab-green" />
-                <span>Science Lab AI</span>
-              </Link>
-            </div>
-            
-            <div className="flex justify-center gap-8">
-              <Link to="/chemistry" className="flex flex-col items-center gap-2 text-gray-600 hover:text-lab-blue transition-colors">
-                <Beaker className="h-6 w-6" />
-                <span>Chemistry Lab</span>
-              </Link>
-              <Link to="/physics" className="flex flex-col items-center gap-2 text-gray-600 hover:text-lab-purple transition-colors">
-                <Zap className="h-6 w-6" />
-                <span>Physics Lab</span>
-              </Link>
-            </div>
-            
-            <div className="flex justify-center md:justify-end">
-              <div className="bg-gray-100 rounded-lg p-3">
-                <p className="text-sm font-medium text-gray-700">Your Achievements</p>
-                <div className="flex gap-2 mt-2">
-                  {completedExperiments.map((expId) => (
-                    <div 
-                      key={expId}
-                      className="w-8 h-8 bg-green-200 rounded-full flex items-center justify-center"
-                      title={experiments.find(e => e.id === expId)?.title || ''}
-                    >
-                      <CheckCircle2 className="h-4 w-4 text-green-700" />
-                    </div>
-                  ))}
-                </div>
+      {/* Footer with Glassmorphism */}
+      <footer className="relative z-10 mt-20">
+        <GlassCard 
+          variant="default" 
+          className="mx-6 mb-6 backdrop-blur-xl bg-white/20 dark:bg-slate-800/30 border-white/30 dark:border-slate-700/50"
+        >
+          <div className="p-8">
+            <div className="grid md:grid-cols-3 gap-8 items-center">
+              <div className="flex justify-center md:justify-start">
+                <Link to="/" className="text-2xl font-bold text-slate-800 dark:text-white flex items-center gap-3 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+                  <Microscope className="h-8 w-8 text-teal-600 dark:text-teal-400" />
+                  <span>Science Lab AI</span>
+                </Link>
+              </div>
+              
+              <div className="flex justify-center gap-12">
+                <Link to="/chemistry" className="flex flex-col items-center gap-3 text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors group">
+                  <div className="p-3 rounded-full bg-purple-100/50 dark:bg-purple-900/30 group-hover:bg-purple-200/70 dark:group-hover:bg-purple-800/50 transition-colors">
+                    <Beaker className="h-6 w-6" />
+                  </div>
+                  <span className="font-medium">Chemistry Lab</span>
+                </Link>
+                <Link to="/physics" className="flex flex-col items-center gap-3 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group">
+                  <div className="p-3 rounded-full bg-blue-100/50 dark:bg-blue-900/30 group-hover:bg-blue-200/70 dark:group-hover:bg-blue-800/50 transition-colors">
+                    <Zap className="h-6 w-6" />
+                  </div>
+                  <span className="font-medium">Physics Lab</span>
+                </Link>
+              </div>
+              
+              <div className="flex justify-center md:justify-end">
+                <GlassCard variant="default" className="bg-gradient-to-r from-teal-100/30 to-purple-100/30 dark:from-teal-900/20 dark:to-purple-900/20 p-4">
+                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">Your Achievements</p>
+                  <div className="flex gap-2">
+                    {completedExperiments.map((expId) => (
+                      <div 
+                        key={expId}
+                        className="w-10 h-10 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full flex items-center justify-center shadow-lg"
+                        title={experiments.find(e => e.id === expId)?.title || ''}
+                      >
+                        <CheckCircle2 className="h-5 w-5 text-white" />
+                      </div>
+                    ))}
+                  </div>
+                </GlassCard>
               </div>
             </div>
+            
+            <div className="mt-8 text-center text-slate-500 dark:text-slate-400 text-sm">
+              © {new Date().getFullYear()} Science Lab AI. All rights reserved.
+            </div>
           </div>
-          
-          <div className="mt-8 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} Science Lab AI. All rights reserved.
-          </div>
-        </div>
+        </GlassCard>
       </footer>
     </div>
   );
