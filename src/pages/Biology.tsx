@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -21,6 +20,15 @@ const Biology = () => {
   }, []);
 
   const experiments = [
+    {
+      id: 'animal-cell',
+      title: 'Animal Cell Structure',
+      description: 'Explore the detailed anatomy of an animal cell, identifying organelles like nucleus, mitochondria, ribosomes, and more.',
+      difficulty: 'Beginner',
+      duration: '25 minutes',
+      image: '/lovable-uploads/ce75bd9d-caa7-4902-a5b5-c00da6b4d2b2.png',
+      path: '/biology/animal-cell'
+    },
     {
       id: 'osmosis',
       title: 'Observing Osmosis in a Potato',
@@ -194,7 +202,15 @@ const Biology = () => {
               >
                 {/* Card Image/Icon Area */}
                 <div className="relative h-48 bg-gradient-to-br from-teal-100/50 to-purple-100/50 dark:from-teal-900/30 dark:to-purple-900/30 flex items-center justify-center overflow-hidden rounded-t-2xl">
-                  <Microscope className="w-16 h-16 text-teal-600/60 dark:text-teal-400/60 group-hover:scale-110 transition-transform duration-300" />
+                  {experiment.image !== '/placeholder.svg' ? (
+                    <img 
+                      src={experiment.image} 
+                      alt={experiment.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  ) : (
+                    <Microscope className="w-16 h-16 text-teal-600/60 dark:text-teal-400/60 group-hover:scale-110 transition-transform duration-300" />
+                  )}
                   
                   {/* Completed badge */}
                   {isCompleted && (
