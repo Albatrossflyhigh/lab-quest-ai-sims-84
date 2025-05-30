@@ -7,17 +7,29 @@ import { GlowingButton } from '@/components/ui/glowing-button';
 import { GlassCard } from '@/components/ui/glass-card';
 import SiteHeader from '@/components/layout/SiteHeader';
 import ChatBotMentor from '@/components/ChatBotMentor';
-import { Bookmark, Clock, Microscope, CheckCircle2, Beaker, Zap, Play } from 'lucide-react';
+import { Bookmark, Clock, Microscope, CheckCircle2, Beaker, Zap, Play, User } from 'lucide-react';
 
 const Biology = () => {
   const [completedExperiments, setCompletedExperiments] = useState<string[]>([]);
+  // Mock authentication state - replace with actual auth when Supabase is connected
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Simulate loading completed experiments from storage
   useEffect(() => {
     // In a real app, this would come from a database or localStorage
     const mockCompletedExperiments = ['osmosis', 'onion-cells'];
     setCompletedExperiments(mockCompletedExperiments);
+    
+    // Mock check for authentication - replace with real auth check
+    const mockAuthState = localStorage.getItem('mockAuth') === 'true';
+    setIsLoggedIn(mockAuthState);
   }, []);
+
+  // Mock login function - remove when real auth is implemented
+  const handleMockLogin = () => {
+    localStorage.setItem('mockAuth', 'true');
+    setIsLoggedIn(true);
+  };
 
   const experiments = [
     {
@@ -118,21 +130,40 @@ const Biology = () => {
               </p>
             </div>
             
-            {/* Primary CTA Button */}
+            {/* Primary CTA Button - conditional based on auth */}
             <div className="flex justify-center mb-16">
-              <GlowingButton 
-                asChild 
-                variant="cyan" 
-                size="xl" 
-                glow="cyan" 
-                animation="pulse"
-                className="text-lg px-8 py-4"
-              >
-                <Link to="/biology/models" className="flex items-center gap-3">
-                  <Microscope className="h-6 w-6" />
-                  Explore 3D Biology Models
-                </Link>
-              </GlowingButton>
+              {isLoggedIn ? (
+                <GlowingButton 
+                  asChild 
+                  variant="cyan" 
+                  size="xl" 
+                  glow="cyan" 
+                  animation="pulse"
+                  className="text-lg px-8 py-4"
+                >
+                  <Link to="/biology/models" className="flex items-center gap-3">
+                    <Microscope className="h-6 w-6" />
+                    Explore 3D Biology Models
+                  </Link>
+                </GlowingButton>
+              ) : (
+                <div className="space-y-4">
+                  <GlowingButton 
+                    onClick={handleMockLogin}
+                    variant="cyan" 
+                    size="xl" 
+                    glow="cyan" 
+                    animation="pulse"
+                    className="text-lg px-8 py-4"
+                  >
+                    <User className="h-6 w-6 mr-3" />
+                    Login to Access Biology Models
+                  </GlowingButton>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    Login required to access interactive experiments
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -144,42 +175,44 @@ const Biology = () => {
       </div>
       
       <main className="relative z-10 container py-8 -mt-16">
-        {/* Progress Tracker with Glassmorphism */}
-        <GlassCard 
-          variant="default" 
-          hover="lift" 
-          animation="floating" 
-          className="mb-12 backdrop-blur-xl bg-white/20 dark:bg-slate-800/30 border border-white/30 dark:border-slate-700/50"
-        >
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 p-8">
-            <div className="flex-1">
-              <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Your Biology Journey</h2>
-              <p className="text-slate-600 dark:text-slate-300 text-lg">
-                {completedExperiments.length} of {experiments.length} experiments completed
-              </p>
-            </div>
-            
-            <div className="flex-1 max-w-md">
-              <div className="mb-4">
-                <Progress 
-                  value={completionPercentage} 
-                  className="h-4 bg-slate-200/50 dark:bg-slate-700/50 rounded-full overflow-hidden"
-                />
+        {/* Progress Tracker with Glassmorphism - only show when logged in */}
+        {isLoggedIn && (
+          <GlassCard 
+            variant="default" 
+            hover="lift" 
+            animation="floating" 
+            className="mb-12 backdrop-blur-xl bg-white/20 dark:bg-slate-800/30 border border-white/30 dark:border-slate-700/50"
+          >
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 p-8">
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Your Biology Journey</h2>
+                <p className="text-slate-600 dark:text-slate-300 text-lg">
+                  {completedExperiments.length} of {experiments.length} experiments completed
+                </p>
               </div>
-              <div className="flex justify-between text-sm text-slate-500 dark:text-slate-400 font-medium">
-                <span>Beginner</span>
-                <span>Intermediate</span>
-                <span>Advanced</span>
+              
+              <div className="flex-1 max-w-md">
+                <div className="mb-4">
+                  <Progress 
+                    value={completionPercentage} 
+                    className="h-4 bg-slate-200/50 dark:bg-slate-700/50 rounded-full overflow-hidden"
+                  />
+                </div>
+                <div className="flex justify-between text-sm text-slate-500 dark:text-slate-400 font-medium">
+                  <span>Beginner</span>
+                  <span>Intermediate</span>
+                  <span>Advanced</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-400 to-purple-400 flex items-center justify-center shadow-lg">
+                  <span className="font-bold text-white text-lg">{completionPercentage}%</span>
+                </div>
               </div>
             </div>
-            
-            <div className="flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-400 to-purple-400 flex items-center justify-center shadow-lg">
-                <span className="font-bold text-white text-lg">{completionPercentage}%</span>
-              </div>
-            </div>
-          </div>
-        </GlassCard>
+          </GlassCard>
+        )}
         
         <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-8">Interactive Experiments</h2>
         
@@ -253,20 +286,33 @@ const Biology = () => {
                   </p>
                 </div>
                 
-                {/* Action buttons */}
+                {/* Action buttons - conditional based on auth */}
                 <div className="p-6 pt-0 flex justify-between items-center">
-                  <GlowingButton 
-                    asChild 
-                    variant={isCompleted ? "neon" : "cyan"} 
-                    size="sm"
-                    glow={isCompleted ? "neon" : "cyan"}
-                    className="flex items-center gap-2"
-                  >
-                    <Link to={experiment.path}>
-                      <Play className="h-4 w-4" />
-                      {isCompleted ? 'Review Experiment' : 'Start Experiment'}
-                    </Link>
-                  </GlowingButton>
+                  {isLoggedIn ? (
+                    <GlowingButton 
+                      asChild 
+                      variant={isCompleted ? "neon" : "cyan"} 
+                      size="sm"
+                      glow={isCompleted ? "neon" : "cyan"}
+                      className="flex items-center gap-2"
+                    >
+                      <Link to={experiment.path}>
+                        <Play className="h-4 w-4" />
+                        {isCompleted ? 'Review Experiment' : 'Start Experiment'}
+                      </Link>
+                    </GlowingButton>
+                  ) : (
+                    <GlowingButton 
+                      onClick={handleMockLogin}
+                      variant="cyan" 
+                      size="sm"
+                      glow="cyan"
+                      className="flex items-center gap-2"
+                    >
+                      <User className="h-4 w-4" />
+                      Login to Start
+                    </GlowingButton>
+                  )}
                   
                   <Button 
                     variant="ghost" 
