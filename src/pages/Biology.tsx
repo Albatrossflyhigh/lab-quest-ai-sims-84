@@ -8,7 +8,7 @@ import { GlowingButton } from '@/components/ui/glowing-button';
 import { GlassCard } from '@/components/ui/glass-card';
 import SiteHeader from '@/components/layout/SiteHeader';
 import ChatBotMentor from '@/components/ChatBotMentor';
-import { Bookmark, Clock, Microscope, CheckCircle2, Beaker, Zap, Play, User, ArrowRight, Atom } from 'lucide-react';
+import { Bookmark, Clock, Microscope, CheckCircle2, Beaker, Zap, Play, User } from 'lucide-react';
 
 const Biology = () => {
   const [completedExperiments, setCompletedExperiments] = useState<string[]>([]);
@@ -134,37 +134,19 @@ const Biology = () => {
             {/* Primary CTA Button - conditional based on auth */}
             <div className="flex flex-col items-center gap-6 mb-16">
               {isLoggedIn ? (
-                <>
-                  <GlowingButton 
-                    asChild 
-                    variant="cyan" 
-                    size="xl" 
-                    glow="cyan" 
-                    animation="pulse"
-                    className="text-lg px-8 py-4"
-                  >
-                    <Link to="/biology/models" className="flex items-center gap-3">
-                      <Microscope className="h-6 w-6" />
-                      Explore 3D Biology Models
-                    </Link>
-                  </GlowingButton>
-                  
-                  {/* New Modern Interface Button */}
-                  <GlowingButton 
-                    asChild 
-                    variant="neon" 
-                    size="xl" 
-                    glow="neon" 
-                    animation="pulse"
-                    className="text-lg px-8 py-4"
-                  >
-                    <Link to="/biology-interface" className="flex items-center gap-3">
-                      <Atom className="h-6 w-6" />
-                      Modern Biology Interface
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
-                  </GlowingButton>
-                </>
+                <GlowingButton 
+                  asChild 
+                  variant="cyan" 
+                  size="xl" 
+                  glow="cyan" 
+                  animation="pulse"
+                  className="text-lg px-8 py-4"
+                >
+                  <Link to="/biology/models" className="flex items-center gap-3">
+                    <Microscope className="h-6 w-6" />
+                    Explore 3D Biology Models
+                  </Link>
+                </GlowingButton>
               ) : (
                 <div className="space-y-4">
                   <GlowingButton 
